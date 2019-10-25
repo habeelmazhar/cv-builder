@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { addEducation } from '../../../actions';
+import * as selectors from "../../../selectors";
+
 import InputField from '../../../components/input-field';
 import Button from '../../../components/button';
+import Item from '../../../components/education-item';
 
 class Step2 extends Component {
     constructor(props) {
         super(props);
-        
+
         this.addEducation = this.addEducation.bind(this);
     }
 
@@ -16,7 +20,10 @@ class Step2 extends Component {
         let course = this.course.input.value;
         let grade = this.grade.input.value;
         let year = this.year.input.value;
- 
+
+        this.props.addEducation({
+            institute, course, grade, year
+        })
         console.log('institute course grade year: ', institute, course, grade, year);
     }
 
@@ -32,26 +39,31 @@ class Step2 extends Component {
                         <InputField
                             ref={(e) => { this.institute = e; }}
                             label="Institute name"
-                            tabIndex="1"
+                            tabIndex="7"
                         />
                         <InputField
                             ref={(e) => { this.course = e; }}
                             label="Course name"
-                            tabIndex="2"
+                            tabIndex="8"
                         />
                         <InputField
                             ref={(e) => { this.grade = e; }}
                             label="Grade / GPA"
-                            tabIndex="3"
+                            tabIndex="9"
                         />
                         <InputField
                             ref={(e) => { this.year = e; }}
                             label="End Year"
-                            tabIndex="4"
+                            tabIndex="10"
                         />
                         <Button onClick={this.addEducation}>
                             Add
                         </Button>
+                        <ul>
+                            {this.props.educations.map((education, i) => (
+                               <Item key={i.toString()} ckey={i} education={education} />
+                            ))}
+                        </ul>
                     </div>
                     <div className="card-footer">
                         <div className="float-left">
@@ -71,4 +83,11 @@ class Step2 extends Component {
     }
 }
 
-export default Step2
+const mapStateToProps = state => ({
+    educations: selectors.selectUserNewEducations(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    addEducation: educationInfo => dispatch(addEducation(educationInfo)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Step2)

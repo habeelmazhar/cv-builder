@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { addExperience } from '../../../actions';
+import * as selectors from "../../../selectors";
+
 import InputField from '../../../components/input-field';
 import Button from '../../../components/button';
+import Item from '../../../components/experience-item';
 
 class Step3 extends Component {
     constructor(props) {
@@ -16,9 +20,12 @@ class Step3 extends Component {
         let position = this.position.input.value;
         let startDate = this.startDate.input.value;
         let endDate = this.endDate.input.value;
- 
+
+        this.props.addExperience({
+            company, position, startDate, endDate
+        })
         console.log('company position startDate endDate: ', company, position, startDate, endDate);
-        
+
     }
 
     render() {
@@ -33,26 +40,31 @@ class Step3 extends Component {
                         <InputField
                             ref={(e) => { this.company = e; }}
                             label="Company name"
-                            tabIndex="1"
+                            tabIndex="11"
                         />
                         <InputField
                             ref={(e) => { this.position = e; }}
                             label="Position"
-                            tabIndex="2"
+                            tabIndex="12"
                         />
                         <InputField
                             ref={(e) => { this.startDate = e; }}
                             label="Start date"
-                            tabIndex="3"
+                            tabIndex="13"
                         />
                         <InputField
                             ref={(e) => { this.endDate = e; }}
                             label="End Date"
-                            tabIndex="4"
+                            tabIndex="14"
                         />
                         <Button onClick={this.addExperience}>
                             Add
                         </Button>
+                        <ul>
+                            {this.props.experiences.map((experience, i) => (
+                                <Item key={i.toString()} ckey={i} experience={experience} />
+                            ))}
+                        </ul>
                     </div>
                     <div className="card-footer">
                         <div className="float-left">
@@ -72,4 +84,11 @@ class Step3 extends Component {
     }
 }
 
-export default Step3
+const mapStateToProps = state => ({
+    experiences: selectors.selectUserNewExperiences(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    addExperience: experienceInfo => dispatch(addExperience(experienceInfo)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Step3)

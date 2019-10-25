@@ -33,10 +33,17 @@ class Login extends Component {
         API.loginUser(email, password).then(res => {
             let data = res.data;
             if (data.status === 'success') {
-                this.props.login(data.data.token);
+                console.log('data.data: ', data.data);
+                let user = {
+                    ...data.data.user,
+                    token: data.data.token
+                }
+                this.props.login(user);
 
                 window.localStorage.setItem('JWT', data.data.token);
                 window.localStorage.setItem("email", data.data.user.email);
+                window.localStorage.setItem("firstname", data.data.user.firstname);
+                window.localStorage.setItem("lastname", data.data.user.lastname);
 
                 self.props.history.push('/home');
             }
@@ -87,7 +94,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    login: userId => dispatch(login(userId)),
+    login: user => dispatch(login(user)),
 });
 
 

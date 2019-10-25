@@ -8,12 +8,14 @@ import Login from './pages/auth/login';
 import Signup from './pages/auth/signup';
 import Logout from './pages/auth/logout';
 
+import { API } from './services';
+
 import RequireAuth from './pages/auth/auth';
 import Main from './pages/main/main';
 import CreateCV from './pages/create/create';
 
 
-import { login } from './actions'
+import { login, updateAllResume } from './actions'
 import { selectUserLoggedIn } from "./selectors";
 
 import { createInstance } from './services';
@@ -24,16 +26,40 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    let jwt = window.localStorage.getItem("JWT");
-    
-    if (jwt)
-      this.props.login(jwt)
-    
+    let token = window.localStorage.getItem("JWT");
+    let email = window.localStorage.getItem("email");
+    let firstname = window.localStorage.getItem("firstname");
+    let lastname = window.localStorage.getItem("lastname");
+
+    let user = {
+      token,
+      email,
+      firstname,
+      lastname
+    }
+    if (token)
+      this.props.login(user)
+
   }
-  
+
   componentDidMount() {
-    const headers = { 'Content-Type': 'application/json' };
+    let token = window.localStorage.getItem("JWT");
+
+    let Authorization = {};
+    if (token)
+      Authorization = { Authorization: 'Bearer ' + token };
+    const headers = { 'Content-Type': 'application/json', ...Authorization };
     createInstance({ baseURL: config.IP, headers });
+
+    if(token){
+      API.getAllResume().then((res)=>{
+        let data = res.data;
+        if(data.status === 'success') {
+          console.log(data.data)
+          this.props.updateAllResume(data.data);
+        }
+      })
+    }
   }
 
   render() {
@@ -61,7 +87,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: userId => dispatch(login(userId))
+  login: userId => dispatch(login(userId)),
+  updateAllResume: data => dispatch(updateAllResume(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

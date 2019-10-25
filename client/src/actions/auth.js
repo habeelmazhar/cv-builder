@@ -1,11 +1,14 @@
 export const USER_ACTION_LOGIN = "LOGIN";
 export const USER_ACTION_LOGOUT = "LOGOUT";
 
-export const login = (userId) => {
+export const login = (user) => {
     return {
         type: USER_ACTION_LOGIN,
         payload: {
-            userId: userId,
+            userId: user.token,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
             isLoggedIn: true
         }
     }

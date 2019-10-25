@@ -12,6 +12,8 @@ class Logout extends Component {
         if (window.localStorage.getItem("JWT")) {
             window.localStorage.removeItem("JWT");
             window.localStorage.removeItem("email");
+            window.localStorage.removeItem("firstname");
+            window.localStorage.removeItem("lastname");
         }
 
         this.props.history.push('/login');

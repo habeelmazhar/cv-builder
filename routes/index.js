@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var UserController = require('../controllers/user');
+var ResumeController = require('../controllers/resume');
 
 var Auth = require('./auth/auth');
 
@@ -15,6 +16,15 @@ router.get('/', Auth, function (req, res, next) {
 router.post('/login', UserController.postLogin);
 
 router.post('/signup', UserController.postSignup);
+
+
+router.get('/resume', Auth, ResumeController.getResumes);
+
+router.post('/resume', Auth, ResumeController.postResumeCreate);
+
+router.put('/resume/:resumeId', Auth, ResumeController.putResumeUpdate);
+
+router.delete('/resume/:resumeId', Auth, ResumeController.deleteResume);
 
 
 router.get('/logout', function (req, res) {

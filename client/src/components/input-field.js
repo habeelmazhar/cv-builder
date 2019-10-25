@@ -25,7 +25,6 @@ class InputField extends PureComponent {
                     defaultValue={this.props.defaultValue}
                     className="form-control" 
                 />
-                {/* <div className="invalid-feedback">Please fill in your email</div> */}
             </div>
         );
     }

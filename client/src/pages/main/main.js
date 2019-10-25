@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { } from '../../actions';
+import * as selectors from "../../selectors";
+
+import Button from "../../components/button";
+import Resume from "../../components/resume-item";
 
 // CSS
 import './main.css';
@@ -7,53 +14,40 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
+        this.handleEdit = this.handleEdit.bind(this);
+    }
+
+    handleEdit() {
+        this.props.history.push('/create');
+    }
+    
+    componentDidMount() {
+
     }
 
     render() {
         return (
             <div>
-                <a className="waves-effect waves-light btn" onClick={() => this.props.history.push('/create')}>Create new</a>
-
-                <section class="section">
-                    <div class="section-header">
-                        <h1>Demo</h1>
+                <section className="section">
+                    <div className="section-header">
+                        <h1>CV Builder</h1>
                     </div>
-
-                    <div class="section-body">
-                        <p class="section-lead">
-                            CV can be created here
-                        </p>
-
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Create assignment</h4>
+                    <Button onClick={() => this.props.history.push('/create')}>
+                        Create new
+                    </Button>
+                    <div className="section-body">
+                        <div className="row">
+                            <div className="col-12 col-md-5">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h4>My CVs</h4>
                                     </div>
-                                    <form id="createAssignments" class="needs-validation" novalidate="">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label>Select course</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Title</label>
-                                                <input type="text" name="title" class="form-control" required="" />
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Deadline</label>
-                                                <input type="text" name="deadline" class="form-control datepicker" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <input type="text" name="description" class="form-control" required="" />
-
-                                            </div>
-                                        </div>
-                                        <div class="card-footer text-right">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </form>
+                                    <div className="card-body">
+                                        {this.props.resumes.map((resume, i) => <Resume key={i} ckey={i} title={resume.personal.email} handleEdit={this.handleEdit} />)}
+                                    </div>
+                                    <div className="card-footer text-right">
+                                        {/* <button type="button" className="btn btn-primary">Save</button> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,4 +59,12 @@ class Home extends Component {
     }
 }
 
-export default Home
+
+const mapStateToProps = state => ({
+    resumes: selectors.selectUserResume(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

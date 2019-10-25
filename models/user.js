@@ -17,6 +17,8 @@ User.findOne({ email: 'test@email.com' }).then(function(doc){
     if(!doc) {
         User.create({
             email: 'test@email.com',
+            firstname: 'Habeel', 
+            lastname: 'Mazhar',
             password: '123123',
         });
     }
