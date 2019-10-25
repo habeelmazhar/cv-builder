@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { } from '../../actions';
+import { updateAllResume } from '../../actions';
 import * as selectors from "../../selectors";
 
 import Button from "../../components/button";
 import Resume from "../../components/resume-item";
+
+import { API, createInstance } from '../../services';
+
+import config from '../../config/config';
 
 // CSS
 import './main.css';
@@ -20,9 +24,21 @@ class Home extends Component {
     handleEdit() {
         this.props.history.push('/create');
     }
-    
-    componentDidMount() {
 
+    componentDidMount() {
+        let token = window.localStorage.getItem("JWT");
+        const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token };
+        createInstance({ baseURL: config.IP, headers });
+
+        if (token) {
+            API.getAllResume().then((res) => {
+                let data = res.data;
+                if (data.status === 'success') {
+                    console.log(data.data)
+                    this.props.updateAllResume(data.data);
+                }
+            })
+        }
     }
 
     render() {
@@ -65,6 +81,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    updateAllResume: data => dispatch(updateAllResume(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

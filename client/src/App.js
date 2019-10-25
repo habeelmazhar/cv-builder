@@ -8,14 +8,12 @@ import Login from './pages/auth/login';
 import Signup from './pages/auth/signup';
 import Logout from './pages/auth/logout';
 
-import { API } from './services';
-
 import RequireAuth from './pages/auth/auth';
 import Main from './pages/main/main';
 import CreateCV from './pages/create/create';
 
 
-import { login, updateAllResume } from './actions'
+import { login } from './actions'
 import { selectUserLoggedIn } from "./selectors";
 
 import { createInstance } from './services';
@@ -43,23 +41,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let token = window.localStorage.getItem("JWT");
-
-    let Authorization = {};
-    if (token)
-      Authorization = { Authorization: 'Bearer ' + token };
-    const headers = { 'Content-Type': 'application/json', ...Authorization };
+    const headers = { 'Content-Type': 'application/json'};
     createInstance({ baseURL: config.IP, headers });
-
-    if(token){
-      API.getAllResume().then((res)=>{
-        let data = res.data;
-        if(data.status === 'success') {
-          console.log(data.data)
-          this.props.updateAllResume(data.data);
-        }
-      })
-    }
   }
 
   render() {
@@ -88,7 +71,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   login: userId => dispatch(login(userId)),
-  updateAllResume: data => dispatch(updateAllResume(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
