@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateAllResume } from '../../actions';
+import { updateAllResume, clearDraft } from '../../actions';
 import * as selectors from "../../selectors";
 
 import Button from "../../components/button";
@@ -19,9 +19,15 @@ class Home extends Component {
         super(props);
 
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleCreateNew = this.handleCreateNew.bind(this);
     }
 
     handleEdit() {
+        this.props.history.push('/create');
+    }
+
+    handleCreateNew() {
+        this.props.clearDraft();
         this.props.history.push('/create');
     }
 
@@ -48,7 +54,7 @@ class Home extends Component {
                     <div className="section-header">
                         <h1>CV Builder</h1>
                     </div>
-                    <Button onClick={() => this.props.history.push('/create')}>
+                    <Button onClick={this.handleCreateNew}>
                         Create new
                     </Button>
                     <div className="section-body">
@@ -82,6 +88,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     updateAllResume: data => dispatch(updateAllResume(data)),
+    clearDraft: () => dispatch(clearDraft())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -8,7 +8,9 @@ import {
     USER_ACTION_DELETE_EXPERIENCE,
 
     USER_ACTION_CLONE_RESUME_TO_DRAFT,
-    USER_ACTION_DELETE_DRAFT
+    USER_ACTION_DELETE_DRAFT,
+
+    USER_ACTION_SELECT_THEME,
 
 } from '../actions/index';
 
@@ -17,6 +19,7 @@ const defaultState = {
     education: [],
     experience: [],
     skills: [],
+    theme: ""
 }
 
 const draft = (state = defaultState, action) => {
@@ -63,6 +66,12 @@ const draft = (state = defaultState, action) => {
 
         case USER_ACTION_DELETE_DRAFT:
             return defaultState
+
+        case USER_ACTION_SELECT_THEME:
+            return {
+                ...state,
+                theme: action.payload
+            }
 
         default:
             return state;

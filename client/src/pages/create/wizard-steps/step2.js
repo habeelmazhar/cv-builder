@@ -30,7 +30,6 @@ class Step2 extends Component {
     render() {
         return (
             <div>
-                <h2>Step2</h2>
                 <div className="card">
                     <div className="card-header">
                         <h4>Education</h4>

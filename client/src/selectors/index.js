@@ -22,6 +22,8 @@ export const selectUserNewSkills = state => state.draft.skills;
 
 export const selectUserResume = state => state.resume;
 
+export const selectThemes = state => state.theme;
+
 
 
 

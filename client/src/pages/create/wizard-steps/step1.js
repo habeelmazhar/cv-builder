@@ -37,7 +37,6 @@ class Step1 extends Component {
 
         return (
             <div>
-                <h2>Step1</h2>
                 <div className="card">
                     <div className="card-header">
                         <h4>Basic Info</h4>

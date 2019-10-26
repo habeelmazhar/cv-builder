@@ -3,6 +3,7 @@ var router = express.Router();
 
 var UserController = require('../controllers/user');
 var ResumeController = require('../controllers/resume');
+var ThemeController = require('../controllers/theme');
 
 var Auth = require('./auth/auth');
 
@@ -27,9 +28,11 @@ router.put('/resume/:resumeId', Auth, ResumeController.putResumeUpdate);
 router.delete('/resume/:resumeId', Auth, ResumeController.deleteResume);
 
 
-router.get('/logout', function (req, res) {
-    req.session.destroy();
-});
+router.get('/theme', ThemeController.getAllThemes);
+
+router.get('/theme/:name', ThemeController.getTheme);
+
+
 
 
 

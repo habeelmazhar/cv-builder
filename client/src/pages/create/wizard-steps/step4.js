@@ -59,7 +59,6 @@ class Step4 extends Component {
     render() {
         return (
             <div>
-                <h2>Step4</h2>
                 <div className="card">
                     <div className="card-header">
                         <h4>Skills</h4>

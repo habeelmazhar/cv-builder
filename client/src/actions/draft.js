@@ -9,6 +9,8 @@ export const USER_ACTION_DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
 export const USER_ACTION_CLONE_RESUME_TO_DRAFT = "CLONE_RESUME_TO_DRAFT";
 export const USER_ACTION_DELETE_DRAFT = "DELETE_DRAFT";
 
+export const USER_ACTION_SELECT_THEME = "SELECT_THEME";
+
 
 export const updatePersonalInfo = (data) => {
     return {
@@ -64,5 +66,12 @@ export const clearDraft = () => {
     return {
         type: USER_ACTION_DELETE_DRAFT,
         payload: null
+    }
+}
+
+export const selectTheme = (theme) => {
+    return {
+        type: USER_ACTION_SELECT_THEME,
+        payload: theme
     }
 }
