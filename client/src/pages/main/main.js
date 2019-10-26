@@ -51,21 +51,33 @@ class Home extends Component {
         return (
             <div>
                 <section className="section">
+                    <div className="section-body">
                     <div className="section-header">
                         <h1>CV Builder</h1>
                     </div>
                     <Button onClick={this.handleCreateNew}>
                         Create new
                     </Button>
-                    <div className="section-body">
                         <div className="row">
-                            <div className="col-12 col-md-5">
+                            <div className="col-12">
                                 <div className="card">
                                     <div className="card-header">
                                         <h4>My CVs</h4>
                                     </div>
                                     <div className="card-body">
-                                        {this.props.resumes.map((resume, i) => <Resume key={i} ckey={i} title={resume.personal.email} handleEdit={this.handleEdit} />)}
+                                        <div className="row">
+                                            {this.props.resumes.map((resume, i) => (
+                                                <div className="col-md-4">
+                                                    <Resume key={i} ckey={i} theme={resume.theme} handleEdit={this.handleEdit} />
+                                                </div>
+                                            ))}
+
+{this.props.resumes.map((resume, i) => (
+                                                <div className="col-md-4">
+                                                    <Resume key={i} ckey={i} theme={resume.theme} handleEdit={this.handleEdit} />
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                     <div className="card-footer text-right">
                                         {/* <button type="button" className="btn btn-primary">Save</button> */}

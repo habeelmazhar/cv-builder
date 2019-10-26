@@ -24,7 +24,7 @@ var Schema = new Schema({
         endDate: String
     }],
     skills: [String],
-    themeId: { type: Schema.Types.ObjectId, ref: 'Theme' },
+    theme: String,
 
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
 

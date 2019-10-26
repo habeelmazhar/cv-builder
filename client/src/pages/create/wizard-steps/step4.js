@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createResume, clearDraft, updateResume } from '../../../actions';
+import { createResume, clearDraft, updateResume, updateSkills } from '../../../actions';
 import * as selectors from "../../../selectors";
 
 import { API } from '../../../services';
@@ -9,15 +9,43 @@ import { API } from '../../../services';
 import InputField from '../../../components/input-field';
 import Button from '../../../components/button';
 
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
+
+const animatedComponents = makeAnimated();
+
+const options = [
+    { label: "ExpressJs", value: "ExpressJs" },
+    { label: "NodeJs", value: "NodeJs" },
+    { label: "Javascript", value: "Javascript" },
+    { label: "ReactJs", value: "ReactJs" },
+    { label: "ReactNative", value: "ReactNative" },
+    { label: "AWS", value: "AWS" },
+    { label: "Firebase", value: "Firebase" },
+    { label: "Git", value: "Git" },
+    { label: "Linux", value: "Linux" },
+    { label: "Bootstrap", value: "Bootstrap" },
+    { label: "JQuery", value: "JQuery" },
+    { label: "HTML/CSS", value: "HTML/CSS" },
+    { label: "Mocha", value: "Mocha" },
+    { label: "Chai", value: "Chai" }
+];
+
 class Step4 extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSkillChange = this.handleSkillChange.bind(this);
         this.handleFinish = this.handleFinish.bind(this);
     }
 
     handleFinish() {
         let draft = this.props.draft;
+
+        console.log('this.props.theme: ', this.props.theme);
+        if (!this.props.theme) {
+            return alert('Please select a theme');
+        }
 
         if (draft._id) {
             API.updateResume(draft._id, draft).then(res => {
@@ -37,6 +65,7 @@ class Step4 extends Component {
                 console.log(err);
             });
         } else {
+
             API.createResume(draft).then(res => {
                 let data = res.data;
                 console.log('data: ', data);
@@ -56,6 +85,12 @@ class Step4 extends Component {
         }
     }
 
+    handleSkillChange(value) {
+        console.log('value: ', value);
+        let list = value.map(i => i.label)
+        this.props.updateSkills(list)
+    }
+
     render() {
         return (
             <div>
@@ -64,10 +99,12 @@ class Step4 extends Component {
                         <h4>Skills</h4>
                     </div>
                     <div className="card-body">
-                        <InputField
-                            ref={(e) => { this.skill = e; }}
-                            label="Skill"
-                            tabIndex="1"
+                        <Select options={options}
+                            closeMenuOnSelect={false}
+                            components={animatedComponents}
+                            isMulti
+                            defaultValue={this.props.skills.map(i => ({ label: i, value: i }))}
+                            onChange={this.handleSkillChange}
                         />
                     </div>
                     <div className="card-footer">
@@ -90,11 +127,14 @@ class Step4 extends Component {
 
 const mapStateToProps = state => ({
     draft: selectors.selectUserDraft(state),
+    theme: selectors.selectUserDraftTheme(state),
+    skills: selectors.selectUserNewSkills(state)
 });
 
 const mapDispatchToProps = dispatch => ({
     createResume: draft => dispatch(createResume(draft)),
     updateResume: (id, data) => dispatch(updateResume(id, data)),
+    updateSkills: (id, data) => dispatch(updateSkills(id, data)),
     clearDraft: () => dispatch(clearDraft())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Step4)

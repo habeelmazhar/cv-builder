@@ -75,3 +75,10 @@ export const selectTheme = (theme) => {
         payload: theme
     }
 }
+
+export const updateSkills = (data) => {
+    return {
+        type: USER_ACTION_UPDATE_SKILLS,
+        payload: [...data]
+    }
+}

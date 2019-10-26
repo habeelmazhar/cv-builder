@@ -87,11 +87,11 @@ class Step1 extends Component {
                         />
                     </div>
                     <div className="card-footer">
-                        <div className="float-left">
+                        {/* <div className="float-left">
                             <Button onClick={this.props.previousStep}>
                                 Previous
                             </Button>
-                        </div>
+                        </div> */}
                         <div className="float-right">
                             <Button onClick={this.props.nextStep}>
                                 Next

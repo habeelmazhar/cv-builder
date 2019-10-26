@@ -42,7 +42,7 @@ const draft = (state = defaultState, action) => {
         case USER_ACTION_UPDATE_SKILLS:
             return {
                 ...state,
-                ...action.payload
+                skills: action.payload
             }
         case USER_ACTION_DELETE_EDUCATION:
             let education = [...state.education];

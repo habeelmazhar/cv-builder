@@ -6,6 +6,7 @@ export const selectUserLoggedIn = state => state.auth.isLoggedIn;
 
 
 export const selectUserDraft = state => state.draft;
+export const selectUserDraftTheme = state => state.draft.theme;
 
 export const selectUserNewEmail = state => state.draft.personal.email;
 export const selectUserNewFirstname = state => state.draft.personal.firstname;

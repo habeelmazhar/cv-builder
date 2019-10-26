@@ -16,8 +16,6 @@ import ejs from '../../../node_modules/ejs/ejs'
 
 import renderHTML from 'react-render-html';
 
-
-const THEMEPATH = config.IP + '/themes/';
 class Themes extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +40,9 @@ class Themes extends Component {
         });
 
         console.log(this.props.theme)
+
+        if (this.props.theme)
+            this.handleSelectTheme(this.props.theme);
     }
 
 
@@ -58,9 +59,11 @@ class Themes extends Component {
     render() {
         if (this.state.html)
             return (
-                <div>
-                    {renderHTML(ejs ? ejs.render(this.state.html, { draft: this.props.draft }) : 'not working')}
-                </div>
+                <Card title='Live preview'>
+                    <div>
+                        {renderHTML(ejs ? ejs.render(this.state.html, { draft: this.props.draft }) : 'not working')}
+                    </div>
+                </Card>
             )
         return (
             <div>
@@ -70,14 +73,13 @@ class Themes extends Component {
                             return (
                                 <div className="col-lg-4" key={theme} onClick={() => this.handleSelectTheme(theme)}>
                                     <Card title={theme}>
-                                        <img src={THEMEPATH + theme + '.png'} width={200} />
+                                        <img src={config.THEMEPATH + theme + '.png'} width={200} />
                                     </Card>
                                 </div>
                             )
                         })}
                     </div>
                 </Card>
-                <h1>{this.props.themes}</h1>
             </div>
         );
     }
@@ -86,7 +88,8 @@ class Themes extends Component {
 
 const mapStateToProps = state => ({
     themes: selectors.selectThemes(state),
-    draft: selectors.selectUserDraft(state)
+    draft: selectors.selectUserDraft(state),
+    theme: selectors.selectUserDraftTheme(state)
 });
 
 const mapDispatchToProps = dispatch => ({

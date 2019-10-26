@@ -1,3 +1,4 @@
 {
-    "IP": "http://localhost:8080"
+    "IP": "http://localhost:8080",
+    "THEMEPATH": "http://localhost:8080/themes/"
 }
