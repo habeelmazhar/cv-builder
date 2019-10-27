@@ -1,1 +1,88 @@
-<h1>theme2</h1>
+<!DOCTYPE html>
+<html lang="en" style="font-family:sans-serif; background-color:white">
+
+<head>
+</head>
+<div class="resume_template" style="background-color:white; margin:0 auto; padding:20px; min-width:275mm; width:275mm; max-width:275mm; border:0; box-shadow:none; height:390mm; outline:none; position:relative"
+    bgcolor="white" width="275mm" height="390mm">
+    <div class="float-left section-left" style="float:left; background:#D4EDE7; height:100%; width:30%" height="100%"
+        width="30%">
+        <div style="padding:0 20px">
+            <% if (draft.image) { %>
+                <img src="<%= draft.image %>" width="180px" height="180px" alt="" class="img-circle"
+                    style="object-fit: cover;border-radius:50%; margin-left:40px; margin-top:20px">
+            <% } %>
+            <h1 style="font-size:35px; margin-top:80px">
+                Contacts
+            </h1>
+            <p style="color:#697372; font-size:20px">
+                <%= draft.personal.email %> <br>
+                <%= draft.personal.linkedin %><br>
+                <%= draft.personal.phone %><br>
+                <%= draft.personal.address %><br>
+            </p>
+            <h1 style="font-size:35px; margin-top:80px">
+                Summary
+
+            </h1>
+            <p style="color:#697372; font-size:20px">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            </p>
+            <h1 style="font-size:35px; margin-top:80px">
+                Education
+            </h1>
+
+            <% draft.education.forEach(obj => { %>
+
+            <h3 style="color:#697372; font-size:20px"><%= obj.institute%>
+            </h3>
+            <p style="margin:0; padding:0; color:#697372; font-size:20px"><%= obj.course%>
+            </p>
+            <p style="margin:0; padding:0; color:#697372; font-size:20px">
+                Grade: <%= obj.grade%></p>
+            <p style="margin:0; padding:0; color:#697372; font-size:20px">
+                Year: <%= obj.year%></p>
+
+            <br><br>
+            <% }) %>
+        </div>
+    </div>
+    <div class="float-right section-right" style="float:right; padding-right:16px; width:65%" width="65%">
+        <h1 class="name-size float-right" style="font-size:60px; margin-top:20px; float:right">
+            <%= draft.personal.firstname %> <%= draft.personal.lastname %></h1>
+        <div style="padding-top:150px">
+            <h1 style="font-size:35px; margin-top:80px">
+                Professional Experience
+            </h1>
+            <% draft.experience.forEach(obj => { %>
+            <p style="color:#697372; font-size:20px"><b style="padding-top:20px"><%= obj.company %> -
+                    <%= obj.position %></b></p>
+            <p style="color:#697372; font-size:20px"><b style="padding-top:20px"><%= obj.startDate %>
+                    - <%= obj.endDate %></b></p>
+
+            <ul>
+                <li style="color:#697372; font-size:20px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut</li>
+                <li style="color:#697372; font-size:20px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut</li>
+                <li style="color:#697372; font-size:20px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut</li>
+            </ul>
+            <br><br>
+            <% }) %>
+
+            <h1 style="font-size:35px; margin-top:80px">
+                Skills
+            </h1>
+            <% draft.skills.forEach(skill => { %>
+            <li style="color:#697372; font-size:20px text-decoration:none">
+                <%= skill %>
+            </li>
+            <% }) %>
+
+        </div>
+    </div>
+</div>
+
+</html>

@@ -58,11 +58,22 @@ class Step2 extends Component {
                         <Button onClick={this.addEducation}>
                             Add
                         </Button>
-                        <ul>
-                            {this.props.educations.map((education, i) => (
-                               <Item key={i.toString()} ckey={i} education={education} />
-                            ))}
-                        </ul>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-md">
+                                <tbody><tr>
+                                    <th>#</th>
+                                    <th>Institute</th>
+                                    <th>Course</th>
+                                    <th>Grade</th>
+                                    <th>Year</th>
+                                    <th>Action</th>
+                                </tr>
+                                    {this.props.educations.map((education, i) => (
+                                        <Item key={i.toString()} ckey={i} education={education} />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div className="card-footer">
                         <div className="float-left">

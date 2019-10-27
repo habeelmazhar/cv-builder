@@ -17,7 +17,9 @@ const isLocalhost = Boolean(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
 );
-
+function isAPIRoute() {
+  return window.location.pathname.startsWith('/api')
+}
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -31,6 +33,15 @@ export default function register() {
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      console.log('window.location.pathname: ', window.location.pathname);
+      if (isAPIRoute()) {
+        console.info('unregistering service worker for admin route')
+        unregister()
+        console.info('reloading')
+        window.location.reload()
+        return false
+      }
+    
 
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.

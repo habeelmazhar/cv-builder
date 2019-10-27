@@ -6,14 +6,13 @@ import { allThemesUpdate, selectTheme } from '../../actions';
 import * as selectors from "../../selectors";
 
 import Card from '../../components/card';
+import Button from '../../components/button';
 
 import { API } from '../../services';
-
 import config from '../../config/config';
 
-
+import { toast } from 'react-toastify';
 import ejs from '../../../node_modules/ejs/ejs'
-
 import renderHTML from 'react-render-html';
 
 class Themes extends Component {
@@ -24,9 +23,13 @@ class Themes extends Component {
             html: ""
         }
         this.handleSelectTheme = this.handleSelectTheme.bind(this);
+
     }
     componentDidMount() {
-
+        if (!this.props.theme)
+            toast.info("Select a theme for live preview.", {
+                position: toast.POSITION.TOP_RIGHT
+            });
         API.getAllThemes().then(res => {
             let data = res.data;
             console.log('data: ', data.data);
@@ -59,11 +62,22 @@ class Themes extends Component {
     render() {
         if (this.state.html)
             return (
-                <Card title='Live preview'>
-                    <div>
-                        {renderHTML(ejs ? ejs.render(this.state.html, { draft: this.props.draft }) : 'not working')}
+                <div>
+                    <div className="section-header">
+                        <h5>Live preview</h5>
+                        <div className="ml-auto pt-2">
+                            <Button onClick={() => this.setState({ html: '' })}>
+                                Change
+                            </Button>
+
+                        </div>
                     </div>
-                </Card>
+                    <div style={{ flex: 1, flexDirection: 'column', alignContent: 'middle', height: '600px', overflow: 'hidden' }}>
+                        <div style={{ backgroundColor: 'white', transform: "scale(0.4)", "transform-origin": "0 0" }}>
+                            {renderHTML(ejs ? ejs.render(this.state.html, { draft: this.props.draft }) : 'not working')}
+                        </div>
+                    </div>
+                </div>
             )
         return (
             <div>

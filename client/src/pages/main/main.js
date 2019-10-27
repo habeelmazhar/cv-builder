@@ -11,6 +11,9 @@ import { API, createInstance } from '../../services';
 
 import config from '../../config/config';
 
+import HomeLayout from '../layouts/homeLayout';
+
+
 // CSS
 import './main.css';
 
@@ -40,7 +43,6 @@ class Home extends Component {
             API.getAllResume().then((res) => {
                 let data = res.data;
                 if (data.status === 'success') {
-                    console.log(data.data)
                     this.props.updateAllResume(data.data);
                 }
             })
@@ -50,44 +52,35 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <section className="section">
-                    <div className="section-body">
+                <HomeLayout firstname={this.props.firstname} lastname={this.props.lastname}>
                     <div className="section-header">
-                        <h1>CV Builder</h1>
+                        <h1>Home</h1>
                     </div>
                     <Button onClick={this.handleCreateNew}>
                         Create new
                     </Button>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h4>My CVs</h4>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h4>My CVs</h4>
+                                </div>
+                                <div className="card-body">
+                                    <div className="row">
+                                        {this.props.resumes.map((resume, i) => (
+                                            <div className="col-md-4">
+                                                <Resume key={i} ckey={i} theme={resume.theme} handleEdit={this.handleEdit} />
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div className="card-body">
-                                        <div className="row">
-                                            {this.props.resumes.map((resume, i) => (
-                                                <div className="col-md-4">
-                                                    <Resume key={i} ckey={i} theme={resume.theme} handleEdit={this.handleEdit} />
-                                                </div>
-                                            ))}
-
-{this.props.resumes.map((resume, i) => (
-                                                <div className="col-md-4">
-                                                    <Resume key={i} ckey={i} theme={resume.theme} handleEdit={this.handleEdit} />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div className="card-footer text-right">
-                                        {/* <button type="button" className="btn btn-primary">Save</button> */}
-                                    </div>
+                                </div>
+                                <div className="card-footer text-right">
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </section>
+
+                </HomeLayout>
             </div>
         );
     }
@@ -96,6 +89,8 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
     resumes: selectors.selectUserResume(state),
+    firstname: selectors.selectUserFirstname(state),
+    lastname: selectors.selectUserLastname(state),
 });
 
 const mapDispatchToProps = dispatch => ({

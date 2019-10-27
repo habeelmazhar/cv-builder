@@ -1,15 +1,97 @@
-<h1>
-    theme1
-    <br>
-    <%= draft.personal.firstname %>
-    <br>
-    <%= draft.personal.lastname %>
-    <br>
-    <%= draft.personal.email %>
-    <br>
-    <%= draft.personal.linkedin %>
-    <br>
-    <%= draft.personal.phone %>
-    <br>
-    <%= draft.personal.address %>
-</h1>
+<html style="background-color:white">
+
+<head></head>
+
+<div class="resume_template"
+    style="background-color:white; font-family:sans-serif; margin:0 auto; padding:0; width:275mm; min-width: 275mm; max-width: 275mm; border:0; box-shadow:none; height:390mm; outline:none; position:relative"
+    bgcolor="white" width="275mm" height="390mm">
+    <div class="header" style="padding-left:60px; padding-top:40px">
+        <% if (draft.image) { %>
+            <div class="first float-left" style="float:left; padding-left:30px; padding-top:10px">
+                <img src="<%= draft.image %>" style="border-radius: 50%;object-fit: cover;" width="180px" height="180px" alt="" class="img-circle">
+            </div>
+        <% } %>
+        <div class="second text-center" style="text-align:center; padding-left:10px; padding-top:80px" align="center">
+            <h2 style="margin:0; padding:0; color:#666; font-size:40px; font-weight:normal">Curriculum Vitae</h2>
+            <h1 style="margin:0; padding:0; color:#444; font-size:50px">
+                <%= draft.personal.firstname %> <%= draft.personal.lastname %>
+            </h1>
+        </div>
+    </div>
+
+
+
+
+    <div class="container" style="padding:80px 50px; position:relative; z-index:100">
+        <div class="section-left" style="border-right:3px solid #0A4472; float:left; width:40%" width="40%">
+            <div class="padding-left-section" style="padding-top:30px">
+                <div class="section" style="padding-bottom:30px">
+                    <h3 style="margin:0; padding:0; color:#128CCD; font-size:26px; padding-bottom:12px">CONTACT</h3>
+                    <ul style="list-style:none">
+                        <li style="color:#666; padding-bottom:16px; text-decoration:none">
+                            <%= draft.personal.email %>
+                        </li>
+                        <li style="color:#666; padding-bottom:16px; text-decoration:none">
+                            <%= draft.personal.linkedin %>
+                        </li>
+                        <li style="color:#666; padding-bottom:16px; text-decoration:none">
+                            <%= draft.personal.phone %>
+                        </li>
+                        <li style="color:#666; padding-bottom:16px; text-decoration:none">
+                            <%= draft.personal.address %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section" style="padding-bottom:30px">
+                    <h3 style="margin:0; padding:0; color:#128CCD; font-size:26px; padding-bottom:12px">SKILLS</h3>
+                    <ul style="list-style:none">
+                        <% draft.skills.forEach(skill => { %>
+                        <li style="color:#666; padding-bottom:16px; text-decoration:none">
+                            <%= skill %>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-right" style="float:right; width:59%" width="59%">
+            <div class="padding-right-section" style="padding-left:60px; padding-top:30px">
+                <div class="section" style="padding-bottom:30px">
+                    <h3 style="margin:0; padding:0; color:#128CCD; font-size:26px; padding-bottom:12px">EDUCATION</h3>
+                    <% draft.education.forEach(obj => { %>
+                    <h4 style="margin:0; padding:0; color:#444; font-size:18px; padding-bottom:6px"><%= obj.institute%>
+                    </h4>
+                    <h5 style="margin:0; padding:0; color:#666; font-size:14px; padding-bottom:6px"><%= obj.course%>
+                    </h5>
+                    <h5 style="margin:0; padding:0; color:#666; font-size:14px; padding-bottom:6px">
+                        Grade: <%= obj.grade%></h5>
+                    <h5 style="margin:0; padding:0; color:#666; font-size:14px; padding-bottom:6px">
+                        Year: <%= obj.year%></h5>
+
+                    <br><br>
+                    <% }) %>
+                </div>
+                <div class="section" style="padding-bottom:30px">
+                    <h3 style="margin:0; padding:0; color:#128CCD; font-size:26px; padding-bottom:12px">EXPERIENCE</h3>
+                    <% draft.experience.forEach(obj => { %>
+                    <h4 style="margin:0; padding:0; color:#444; font-size:18px; padding-bottom:6px"><%= obj.company %>
+                    </h4>
+                    <h5 style="margin:0; padding:0; color:#666; font-size:14px; padding-bottom:6px"><%= obj.position %>
+                    </h5>
+                    <h5 style="margin:0; padding:0; color:#666; font-size:14px; padding-bottom:6px"><%= obj.startDate %>
+                        - <%= obj.endDate %></h5>
+                    <br><br>
+                    <% }) %>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix" style="clear:both"></div>
+    </div>
+
+</div>
+
+</html>

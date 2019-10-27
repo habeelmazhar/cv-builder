@@ -6,6 +6,7 @@ import { selectUserResume } from "../selectors";
 
 import { API } from '../services';
 
+import { toast } from "react-toastify";
 import config from '../config/config';
 
 class resumeItem extends Component {
@@ -32,14 +33,23 @@ class resumeItem extends Component {
         API.deleteResume(id).then((res) => {
             let data = res.data;
             if (data.status === 'success')
-                alert('successfully deleted')
+                toast.success('Successfully deleted CV', { position: toast.POSITION.TOP_CENTER })
         });
+    }
+
+    openInNewTab(url) {
+        let id = this.props.resumes[this.props.ckey]._id
+
+        var win = window.open(url + id, '_blank');
+        win.focus();
     }
 
     render() {
         return (
             <div className="text-center">
-                <button type="button" className="btn btn-default">View</button>
+                <button onClick={()=> this.openInNewTab(config.IP + "/api/resume/view/")} type="button" className="btn btn-default">View</button>
+                <button onClick={() => this.openInNewTab(config.IP + "/api/resume/download/")} type="button" className="btn btn-default">Download</button>
+
                 <div >
                     <img src={config.THEMEPATH + this.props.theme + '.png'} width={180} alt="" />
                 </div>

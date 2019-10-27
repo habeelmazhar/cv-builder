@@ -6,11 +6,13 @@ import * as selectors from "../../../selectors";
 
 import { API } from '../../../services';
 
-import InputField from '../../../components/input-field';
 import Button from '../../../components/button';
+import FileInput from '../../../components/file-input';
 
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
+
+import { toast } from 'react-toastify';
 
 const animatedComponents = makeAnimated();
 
@@ -31,6 +33,8 @@ const options = [
     { label: "Chai", value: "Chai" }
 ];
 
+
+
 class Step4 extends Component {
     constructor(props) {
         super(props);
@@ -39,12 +43,13 @@ class Step4 extends Component {
         this.handleFinish = this.handleFinish.bind(this);
     }
 
+
     handleFinish() {
         let draft = this.props.draft;
 
         console.log('this.props.theme: ', this.props.theme);
         if (!this.props.theme) {
-            return alert('Please select a theme');
+            return toast.error('Please select a theme', { position: toast.POSITION.TOP_CENTER })
         }
 
         if (draft._id) {
@@ -53,13 +58,14 @@ class Step4 extends Component {
                 console.log('data: ', data);
                 if (data.status === 'success') {
                     this.props.updateResume(draft._id, data.data);
-                    alert('Updated');
+
+                    toast.success('Successfully updated CV', { position: toast.POSITION.TOP_CENTER })
 
                     this.props.clearDraft();
                     this.props.onFinish();
                 }
                 else
-                    alert('Invalid username / password')
+                    toast.failed('Failed to update', { position: toast.POSITION.TOP_CENTER })
 
             }).catch(err => {
                 console.log(err);
@@ -71,13 +77,14 @@ class Step4 extends Component {
                 console.log('data: ', data);
                 if (data.status === 'success') {
                     this.props.createResume(data.data);
-                    alert('Success');
+
+                    toast.success('Successfully created CV', { position: toast.POSITION.TOP_CENTER })
 
                     this.props.clearDraft();
                     this.props.onFinish();
                 }
                 else
-                    alert('Invalid username / password')
+                    toast.failed('Failed to update', { position: toast.POSITION.TOP_CENTER })
 
             }).catch(err => {
                 console.log(err);
@@ -104,8 +111,12 @@ class Step4 extends Component {
                             components={animatedComponents}
                             isMulti
                             defaultValue={this.props.skills.map(i => ({ label: i, value: i }))}
+                            styles={{ backgroundColor: 'red' }}
                             onChange={this.handleSkillChange}
                         />
+
+                        <FileInput />
+                       
                     </div>
                     <div className="card-footer">
                         <div className="float-left">

@@ -2,4 +2,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+.navbar-bg {
+  height: 74px !important;
+}
+
+.main-content {
+  padding-top: 100px !important;
 }

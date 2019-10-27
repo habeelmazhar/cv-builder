@@ -22,7 +22,5 @@ exports.getAllThemes = function (req, res, next) {
 
 exports.getTheme = function (req, res, next) {
     let name = req.params.name;
-    console.log('name: ', name);
-    // res.render('themes/'+name+'.ejs')
     res.sendFile(path.join(__dirname, '../views/themes/' + Themes[name]));
 }

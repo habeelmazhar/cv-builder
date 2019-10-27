@@ -59,11 +59,23 @@ class Step3 extends Component {
                         <Button onClick={this.addExperience}>
                             Add
                         </Button>
-                        <ul>
-                            {this.props.experiences.map((experience, i) => (
-                                <Item key={i.toString()} ckey={i} experience={experience} />
-                            ))}
-                        </ul>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-md">
+                                <tbody><tr>
+                                    <th>#</th>
+                                    <th>Company</th>
+                                    <th>Position</th>
+                                    <th>Start date</th>
+                                    <th>End Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                    {this.props.experiences.map((experience, i) => (
+                                        <Item key={i.toString()} ckey={i} experience={experience} />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div className="card-footer">
                         <div className="float-left">

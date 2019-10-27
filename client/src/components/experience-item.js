@@ -7,19 +7,14 @@ class experienceItem extends Component {
 
     render() {
         return (
-            <li>
-                <span className="float-right" onClick={()=> this.props.removeExperience(this.props.ckey)}>x</span>
-                <p>
-                    
-                    {this.props.experience.company}
-                    <br/>
-                    {this.props.experience.position}
-                    <br/>
-                    {this.props.experience.startDate}
-                    <br/>
-                    {this.props.experience.endDate}
-                </p>
-            </li>
+            <tr>
+                <td>{this.props.ckey + 1}</td>
+                <td>{this.props.experience.company}</td>
+                <td>{this.props.experience.position}</td>
+                <td>{this.props.experience.startDate}</td>
+                <td>{this.props.experience.endDate}</td>
+                <td><a href="#" class="btn btn-danger" onClick={() => this.props.removeExperience(this.props.ckey)}>X</a></td>
+            </tr>
         );
     }
 }

@@ -18,6 +18,9 @@ import { selectUserLoggedIn } from "./selectors";
 
 import { createInstance } from './services';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import config from './config/config';
 
 class App extends Component {
@@ -59,6 +62,8 @@ class App extends Component {
           <Route path='/home' component={RequireAuth(Main)} />
           <Route path='/create' component={RequireAuth(CreateCV)} />
           <Route path='/select-theme' component={RequireAuth(Main)} />
+
+          <ToastContainer />
         </div>
       </Router>
     );

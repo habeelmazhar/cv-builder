@@ -27,6 +27,10 @@ router.put('/resume/:resumeId', Auth, ResumeController.putResumeUpdate);
 
 router.delete('/resume/:resumeId', Auth, ResumeController.deleteResume);
 
+router.get('/resume/view/:resumeId', ResumeController.viewResume);
+
+router.get('/resume/download/:resumeId', ResumeController.downloadResume);
+
 
 router.get('/theme', ThemeController.getAllThemes);
 

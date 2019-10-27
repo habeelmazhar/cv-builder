@@ -10,6 +10,8 @@ import AuthLayout from '../layouts/authLayout';
 import InputField from '../../components/input-field';
 import Button from '../../components/button';
 
+import { toast } from "react-toastify";
+
 import config from '../../config/config';
 
 class Login extends Component {
@@ -48,7 +50,7 @@ class Login extends Component {
                 self.props.history.push('/home');
             }
             else
-                alert('Invalid username / password')
+                toast.error('Invalid username / password', { position: toast.POSITION.TOP_CENTER })
 
         }).catch(err => {
             console.log(err);

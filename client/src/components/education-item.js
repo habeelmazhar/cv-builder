@@ -7,18 +7,14 @@ class educationItem extends Component {
 
     render() {
         return (
-            <li>
-                <span className="float-right" onClick={()=> this.props.removeEducation(this.props.ckey)}>x</span>
-                <p>
-                    {this.props.education.institute}
-                    <br />
-                    {this.props.education.course}
-                    <br />
-                    {this.props.education.grade}
-                    <br />
-                    {this.props.education.year}
-                </p>
-            </li>
+            <tr>
+                <td>{this.props.ckey + 1}</td>
+                <td>{this.props.education.institute}</td>
+                <td>{this.props.education.course}</td>
+                <td>{this.props.education.grade}</td>
+                <td>{this.props.education.year}</td>
+                <td><a href="#" class="btn btn-danger" onClick={() => this.props.removeEducation(this.props.ckey)}>X</a></td>
+            </tr>
         );
     }
 }

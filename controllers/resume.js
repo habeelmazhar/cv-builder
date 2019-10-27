@@ -2,17 +2,22 @@ var User = require('../models/user');
 var Resume = require('../models/resume');
 
 var TokenSign = require('../routes/auth/tokensign');
+var ejs = require('ejs');
+
+var fs = require('fs')
+var path = require('path')
+var conversion = require("phantom-html-to-pdf")();
 
 exports.getResumes = async function (req, res, next) {
     const userId = req.body.id;
-    let resumes = await Resume.find({userId});
-    
+    let resumes = await Resume.find({ userId });
+
     res.json({
         status: 'success',
         msg: 'Successfully fetched resumes',
         data: resumes
     });
-    
+
 }
 
 exports.postResumeCreate = async function (req, res, next) {
@@ -95,4 +100,26 @@ exports.deleteResume = async function (req, res, next) {
         data: null
     });
 
+}
+
+
+exports.viewResume = async function (req, res, next) {
+    let id = req.params.resumeId;
+    let resume = await Resume.findById(id);
+
+    res.render('themes/' + resume.theme , { draft: resume })
+}
+
+exports.downloadResume = async function (req, res, next) {
+    let id = req.params.resumeId;
+    let resume = await Resume.findById(id);
+
+    let html = await ejs.renderFile(path.join(__dirname, '../views/themes/' + resume.theme + '.ejs'), { draft: resume });
+
+    conversion({ html: html }, function (err, pdf) {
+        // since pdf.stream is a node.js stream you can use it
+        // to save the pdf to a file (like in this example) or to
+        // respond an http request.
+        pdf.stream.pipe(res);
+    });
 }

@@ -25,6 +25,7 @@ var Schema = new Schema({
     }],
     skills: [String],
     theme: String,
+    image: String,
 
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
 

@@ -12,6 +12,14 @@ class Step1 extends Component {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        
+        let email = this.props.emailDefault;
+        let firstname = this.props.firstnameDefault;
+        let lastname = this.props.lastnameDefault;
+    
+        this.props.updatePersonalInfo({
+            email, firstname,lastname,
+        })
     }
 
     handleChange(){

@@ -2,6 +2,7 @@ export const USER_ACTION_UPDATE_PERSONAL_INFO = "UPDATE_PERSONAL_INFO";
 export const USER_ACTION_UPDATE_EDUCATION = "UPDATE_EDUCATION";
 export const USER_ACTION_UPDATE_EXPERIENCE = "UPDATE_EXPERIENCE";
 export const USER_ACTION_UPDATE_SKILLS = "UPDATE_SKILLS";
+export const USER_ACTION_UPDATE_IMAGE = "UPDATE_IMAGE";
 
 export const USER_ACTION_DELETE_EDUCATION = "DELETE_EDUCATION";
 export const USER_ACTION_DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
@@ -80,5 +81,12 @@ export const updateSkills = (data) => {
     return {
         type: USER_ACTION_UPDATE_SKILLS,
         payload: [...data]
+    }
+}
+
+export const updateImage = (data) => {
+    return {
+        type: USER_ACTION_UPDATE_IMAGE,
+        payload: data
     }
 }

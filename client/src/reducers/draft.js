@@ -3,6 +3,7 @@ import {
     USER_ACTION_UPDATE_EDUCATION,
     USER_ACTION_UPDATE_EXPERIENCE,
     USER_ACTION_UPDATE_SKILLS,
+    USER_ACTION_UPDATE_IMAGE,
 
     USER_ACTION_DELETE_EDUCATION,
     USER_ACTION_DELETE_EXPERIENCE,
@@ -15,11 +16,19 @@ import {
 } from '../actions/index';
 
 const defaultState = {
-    personal: {},
+    personal: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        linkedin: "",
+        phone: "",
+        address: ""
+    },
     education: [],
     experience: [],
     skills: [],
-    theme: ""
+    theme: "",
+    image: ""
 }
 
 const draft = (state = defaultState, action) => {
@@ -71,6 +80,11 @@ const draft = (state = defaultState, action) => {
             return {
                 ...state,
                 theme: action.payload
+            }
+        case USER_ACTION_UPDATE_IMAGE:
+            return {
+                ...state,
+                image: action.payload
             }
 
         default:
