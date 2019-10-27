@@ -87,7 +87,9 @@ class Themes extends Component {
                             return (
                                 <div className="col-lg-4" key={theme} onClick={() => this.handleSelectTheme(theme)}>
                                     <Card title={theme}>
-                                        <img src={config.THEMEPATH + theme + '.png'} width={200} />
+                                        <div style={{boxShadow: '4px 4px 13px #DDDDDD'}}>
+                                        <img alt="theme" src={config.THEMEPATH + theme + '.png'} width={200} />
+                                        </div>
                                     </Card>
                                 </div>
                             )

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import { updateImage } from '../actions';
-import * as selectors from "../selectors";
 
 import Resizer from 'react-image-file-resizer';
 
@@ -35,11 +34,16 @@ class FileInput extends Component {
 
     render() {
         return (
-            <input
-                type="file"
-                id="imageFile"
-                name='imageFile'
-                onChange={this.imageUpload} />
+            <div>
+                <div className="card-header pl-0 pt-5">
+                    <h4>Photo - Optional</h4>
+                </div>
+                <input
+                    type="file"
+                    id="imageFile"
+                    name='imageFile'
+                    onChange={this.imageUpload} />
+            </div>
         );
     }
 }

@@ -13,7 +13,7 @@ class educationItem extends Component {
                 <td>{this.props.education.course}</td>
                 <td>{this.props.education.grade}</td>
                 <td>{this.props.education.year}</td>
-                <td><a href="#" class="btn btn-danger" onClick={() => this.props.removeEducation(this.props.ckey)}>X</a></td>
+                <td><button className="btn btn-danger" onClick={() => this.props.removeEducation(this.props.ckey)}>X</button></td>
             </tr>
         );
     }

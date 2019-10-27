@@ -58,8 +58,8 @@ class Step2 extends Component {
                         <Button onClick={this.addEducation}>
                             Add
                         </Button>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-md">
+                        <div className="table-responsive">
+                            <table className="table table-striped table-md">
                                 <tbody><tr>
                                     <th>#</th>
                                     <th>Institute</th>

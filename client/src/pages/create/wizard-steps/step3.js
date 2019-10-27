@@ -60,8 +60,8 @@ class Step3 extends Component {
                             Add
                         </Button>
 
-                        <div class="table-responsive">
-                            <table class="table table-striped table-md">
+                        <div className="table-responsive">
+                            <table className="table table-striped table-md">
                                 <tbody><tr>
                                     <th>#</th>
                                     <th>Company</th>

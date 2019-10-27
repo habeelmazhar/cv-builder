@@ -13,8 +13,8 @@ const HomeLayout = (props) => {
             <ul className="navbar-nav navbar-right">
 
                 <li className="dropdown">
-                    <a href="#" data-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img alt="image" src={config.IP + "/avatar-1.png"} className="rounded-circle mr-1" />
+                    <a href="" data-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="avatar" src={config.IP + "/avatar-1.png"} className="rounded-circle mr-1" />
                         <div className="d-sm-none d-lg-inline-block">Hi, {props.firstname} {props.lastname}</div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">

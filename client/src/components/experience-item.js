@@ -13,7 +13,7 @@ class experienceItem extends Component {
                 <td>{this.props.experience.position}</td>
                 <td>{this.props.experience.startDate}</td>
                 <td>{this.props.experience.endDate}</td>
-                <td><a href="#" class="btn btn-danger" onClick={() => this.props.removeExperience(this.props.ckey)}>X</a></td>
+                <td><button className="btn btn-danger" onClick={() => this.props.removeExperience(this.props.ckey)}>X</button></td>
             </tr>
         );
     }
