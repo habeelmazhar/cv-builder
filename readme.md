@@ -6,3 +6,6 @@
 
 > cd client && npm install
 
+##### Run app
+
+> npm start (in root folder)
